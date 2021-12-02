@@ -1,16 +1,16 @@
-import os
-import sys
-import torch
-import h5py
 import json
-from PIL import Image
-import numpy as np
-from collections import defaultdict
-from tqdm import tqdm
+import os
 import random
+import sys
+from collections import defaultdict
 
+import h5py
+import numpy as np
+import torch
 from maskrcnn_benchmark.structures.bounding_box import BoxList
 from maskrcnn_benchmark.structures.boxlist_ops import boxlist_iou
+from PIL import Image
+from tqdm import tqdm
 
 BOX_SCALE = 1024  # Scale at which we have the boxes
 
@@ -62,6 +62,7 @@ class VGDataset(torch.utils.data.Dataset):
                 filter_non_overlap=self.filter_non_overlap,
             )
 
+            print(img_dir)
             self.filenames, self.img_info = load_image_filenames(img_dir, image_file) # length equals to split_mask
             self.filenames = [self.filenames[i] for i in np.where(self.split_mask)[0]]
             self.img_info = [self.img_info[i] for i in np.where(self.split_mask)[0]]

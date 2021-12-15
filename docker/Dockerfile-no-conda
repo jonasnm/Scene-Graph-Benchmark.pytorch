@@ -1,0 +1,40 @@
+# FROM pytorch/pytorch:1.9.1-cuda11.1-cudnn8-runtime
+FROM pytorch/pytorch:1.5.1-cuda10.1-cudnn7-runtime
+# ARG CUDA="10.2"
+# ARG CUDNN="8"
+
+# FROM nvidia/cuda:${CUDA}-cudnn${CUDNN}-devel-ubuntu16.04
+# FROM nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
+
+# # install basics
+RUN apt-get update -y \
+ && apt-get install -y apt-utils git wget curl ca-certificates bzip2 cmake python3-pip tree htop bmon iotop g++ \
+ && apt-get install -y libglib2.0-0 libsm6 libxext6 libxrender-dev
+
+
+# RUN pip3 install --upgrade "pip < 21.0"
+
+# RUN pip3 install requests ninja yacs cython matplotlib opencv-python tqdm
+
+RUN pip install ipython scipy h5py
+
+RUN pip install ninja yacs cython matplotlib tqdm opencv-python overrides
+
+# Install PyTorch 1.0 Nightly
+# RUN conda install pytorch torchvision cudatoolkit=${CUDA} -c pytorch
+# RUN pip3 install pytorch torchvision cudatoolkit -c pytorch
+
+# Install pycocotools
+RUN git clone https://github.com/cocodataset/cocoapi.git \
+ && cd cocoapi/PythonAPI \
+ && python setup.py build_ext install
+
+# install apex
+RUN git clone https://github.com/NVIDIA/apex.git \
+ && cd apex \
+ pip install -v --no-cache-dir ./apex
+
+RUN git clone https://github.com/jonasnm/Scene-Graph-Benchmark.pytorch.git \
+ && mv Scene-Graph-Benchmark.pytorch scene-graph-benchmark \
+ && cd scene-graph-benchmark \
+ && python setup.py build develop

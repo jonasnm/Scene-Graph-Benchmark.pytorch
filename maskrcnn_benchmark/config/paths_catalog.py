@@ -106,13 +106,13 @@ class DatasetCatalog(object):
             "ann_file": "cityscapes/annotations/instancesonly_filtered_gtFine_test.json"
         },
         "VG_stanford_filtered": {
-            "img_dir": "/content/drive/MyDrive/NORCE/counting_hero/VG/VG_100K",
+            "img_dir": "/ssd_data/visual_genome/images/VG_100K",
             "roidb_file": "vg/VG-SGG.h5",
             "dict_file": "vg/VG-SGG-dicts.json",
             "image_file": "vg/image_data.json",
         },
         "VG_stanford_filtered_with_attribute": {
-            "img_dir": "/content/drive/MyDrive/NORCE/counting_hero/VG/VG_100K",
+            "img_dir": "/ssd_data/visual_genome/images/VG_100K",
             "roidb_file": "vg/VG-SGG-with-attri.h5",
             "dict_file": "vg/VG-SGG-dicts-with-attri.json",
             "image_file": "vg/image_data.json",
